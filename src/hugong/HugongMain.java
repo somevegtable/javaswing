@@ -1,10 +1,12 @@
+package hugong;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 
 public class HugongMain {
-    public static void createShow(){
+    public static void createShow(String userName){
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
@@ -72,7 +74,7 @@ public class HugongMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    SalaryShow.createShow();
+                    SalaryShow.createShow(userName);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }

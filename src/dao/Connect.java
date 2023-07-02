@@ -1,3 +1,5 @@
+package dao;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -14,7 +16,7 @@ public class Connect {
         user = "root";//数据库登录名
         password = "root";//密码
         try { // 通过访问数据库的URL获取数据库连接对象
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/swingdemo?useUnicode=true&characterEncoding=gbk", user, password);
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/swingdemo?useUnicode=true&characterEncoding=gbk", user, password);
             System.out.println("数据库连接成功");
         } catch (Exception e) {
             e.printStackTrace();

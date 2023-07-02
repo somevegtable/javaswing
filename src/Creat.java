@@ -1,3 +1,6 @@
+import dao.DAO;
+import hugong.HugongMain;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -106,7 +109,7 @@ public class Creat {
                     frame.setVisible(false);
                 }else if(radioButtonText.equals("护工") && hugongResultSet.next()){
                     JOptionPane.showMessageDialog(null, "护工登录成功", "成功", 1);
-                    HugongMain.createShow();
+                    HugongMain.createShow(userName.getText());
                     frame.setVisible(false);
                 }else if(radioButtonText.equals("保安") && baoanResultSet.next()){
                     JOptionPane.showMessageDialog(null, "保安登录成功", "成功", 1);

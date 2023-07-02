@@ -1,15 +1,15 @@
+package baoan;
+
 import com.mysql.cj.util.StringUtils;
-import entity.Bed;
+import dao.DAO;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class UpdateHealthShow {
+public class RegisterOldOutShow {
     public static void createShow() throws SQLException {
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
