@@ -14,9 +14,9 @@ public class Connect {
             e.printStackTrace();
         }
         user = "root";//数据库登录名
-        password = "root";//密码
+        password = "lfy147258";//密码
         try { // 通过访问数据库的URL获取数据库连接对象
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/swingdemo?useUnicode=true&characterEncoding=gbk", user, password);
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/swingdemo?useUnicode=true&characterEncoding=utf8", user, password);
             System.out.println("数据库连接成功");
         } catch (Exception e) {
             e.printStackTrace();

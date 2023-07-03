@@ -1,6 +1,8 @@
 import admin.AdminMain;
 import baoan.BaoanMain;
 import dao.DAO;
+import family.familyMain;
+import accountant.accountantMain;
 import hugong.HugongMain;
 
 import javax.swing.*;
@@ -48,16 +50,24 @@ public class Login {
         JRadioButton radioButton1 = new JRadioButton("护工", true);
         JRadioButton radioButton2 = new JRadioButton("保安");
         JRadioButton radioButton3 = new JRadioButton("管理员");
-        radioButton1.setBounds(180, 200, 100, 30);
-        radioButton2.setBounds(280, 200, 100, 30);
-        radioButton3.setBounds(380, 200, 100, 30);
+        JRadioButton radioButton4 = new JRadioButton("亲属");
+        JRadioButton radioButton5 = new JRadioButton("财务人员");
+        radioButton1.setBounds(120, 200, 100, 30);
+        radioButton2.setBounds(220, 200, 100, 30);
+        radioButton3.setBounds(320, 200, 100, 30);
+        radioButton4.setBounds(420, 200, 100, 30);
+        radioButton5.setBounds(520, 200, 100, 30);
         ButtonGroup group = new ButtonGroup();
         group.add(radioButton1);
         group.add(radioButton2);
         group.add(radioButton3);
+        group.add(radioButton4);
+        group.add(radioButton5);
         panel.add(radioButton1);
         panel.add(radioButton2);
         panel.add(radioButton3);
+        panel.add(radioButton4);
+        panel.add(radioButton5);
 
         //登录按钮
         JButton login = new JButton("登录");
@@ -116,6 +126,14 @@ public class Login {
                 }else if(radioButtonText.equals("保安") && baoanResultSet.next()){
                     JOptionPane.showMessageDialog(null, "保安登录成功", "成功", 1);
                     BaoanMain.createShow(userName.getText());
+                    frame.setVisible(false);
+                }else if(radioButtonText.equals("亲属") && baoanResultSet.next()){
+                    JOptionPane.showMessageDialog(null, "亲属登录成功", "成功", 1);
+                    familyMain.createShow(userName.getText());
+                    frame.setVisible(false);
+                }else if(radioButtonText.equals("财务人员") && baoanResultSet.next()){
+                    JOptionPane.showMessageDialog(null, "财务人员登录成功", "成功", 1);
+                    accountantMain.createShow(userName.getText());
                     frame.setVisible(false);
                 }else {
                     JOptionPane.showMessageDialog(null, "登录失败", "失败", 0);
