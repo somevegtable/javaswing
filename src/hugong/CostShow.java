@@ -1,10 +1,17 @@
 package hugong;
 
+import com.mysql.cj.util.StringUtils;
 import dao.DAO;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CostShow {
     public static void createShow() throws SQLException {
@@ -16,49 +23,81 @@ public class CostShow {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        //查询薪资信息
-        DAO dao = new DAO();
-        ResultSet resultSet = dao.query("select * from t_bed");
+        //创建老人place标签
+        JLabel placeLabel = new JLabel("申请老人床位号：");
+        placeLabel.setFont(new Font("微软雅黑", 0, 13));
+        placeLabel.setBounds(180, 100, 110, 25);
+        panel.add(placeLabel);
 
-        //ResultSet转换为List
-        /*List<Bed> bedList = new ArrayList<>();
-        while(resultSet.next()){
-            Bed bed = new Bed();
-            bed.setId(resultSet.getInt(1));
-            bed.setCode(resultSet.getString(2));
-            bed.setStatus(resultSet.getString(3));
-            bed.setHolder(resultSet.getString(4));
-            bedList.add(bed);
-        }*/
+        //创建老人place输入文字域
+        JTextField placeText = new JTextField(20);
+        placeText.setBounds(280, 100, 165, 25);
+        panel.add(placeText);
 
-        //创建JTable
-        /*JTable table;
-        String [] index = {"id","床位码","状态","占用者"};
-        Object [][] data = new Object[bedList.size()][index.length];
-        //3,向data中添加数据
-        for (int i = 0; i < bedList.size(); i++) {
-            Bed bed = bedList.get(i);
-            data[i][0] = bed.getId();
-            data[i][1] = bed.getCode();
-            data[i][2] = bed.getStatus();
-            data[i][3] = bed.getHolder();
-        }*/
+        //创建申请费用金额标签
+        JLabel amountLabel = new JLabel("申请费用金额：");
+        amountLabel.setFont(new Font("微软雅黑", 0, 13));
+        amountLabel.setBounds(180, 150, 100, 25);
+        panel.add(amountLabel);
 
-        //4,创建一个默认的表格模型
-        /*DefaultTableModel defaultModel = new DefaultTableModel(data, index);
-        table=new JTable(defaultModel);
-        table.setBackground(Color.WHITE);
-        table.setPreferredScrollableViewportSize(new Dimension(100, 80));//JTable的高度和宽度按照设定
-        table.setFillsViewportHeight(true);*/
+        //创建申请费用输入文字域
+        JTextField amountText = new JTextField(20);
+        amountText.setBounds(280, 150, 165, 25);
+        panel.add(amountText);
 
-        //5，给表格设置滚动条
-        /*JScrollPane jScrollPane = new JScrollPane();
-        jScrollPane.setViewportView(table);*/
+        //创建申请原因标签
+        JLabel reasonLabel = new JLabel("申请费用原因：");
+        reasonLabel.setFont(new Font("微软雅黑", 0, 13));
+        reasonLabel.setBounds(180, 200, 100, 25);
+        panel.add(reasonLabel);
 
-        /*frame.add(panel, BorderLayout.NORTH);
-        frame.setVisible(true);
-        frame.add(jScrollPane,BorderLayout.CENTER);*/
+        //创建申请原因文字域
+        JTextField reasonText = new JTextField(20);
+        reasonText.setBounds(280, 200, 165, 25);
+        panel.add(reasonText);
 
+        JButton confirm = new JButton("登记");
+        confirm.setBounds(250, 250, 80, 25);
+        panel.add(confirm);
+        confirm.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                DAO dao = new DAO();
+                ResultSet resultSet = dao.query("select code from t_bed");
+                Set<String> set = new HashSet<>();
+                try{
+                    while(resultSet.next()){
+                        set.add(resultSet.getString(1));
+                    }
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+
+                if (StringUtils.isNullOrEmpty(placeText.getText())){
+                    JOptionPane.showMessageDialog(null, "床位号不能为空！", "失败", 0);
+                }else if(!set.contains(placeText.getText())){
+                    JOptionPane.showMessageDialog(null, "床位号不存在！", "失败", 0);
+                }else if (StringUtils.isNullOrEmpty(amountText.getText())){
+                    JOptionPane.showMessageDialog(null, "申请金额不能为空！", "失败", 0);
+                }else if (StringUtils.isNullOrEmpty(reasonText.getText())){
+                    JOptionPane.showMessageDialog(null, "申请原因不能为空！", "失败", 0);
+                }else{
+                    Integer row = dao.update("insert into t_cost (amount, place, description)" +
+                            "values("+amountText.getText()+", '"+placeText.getText()+"', '"+reasonText.getText()+"')");
+
+                    if (row > 0){
+                        JOptionPane.showMessageDialog(null, "登记成功", "成功", 1);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "登记失败！", "失败", 0);
+                    }
+                }
+
+
+            }
+        });
+
+        frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }

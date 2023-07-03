@@ -73,7 +73,7 @@ public class RegisterPersonInShow {
                     StringUtils.isNullOrEmpty(genderText.getText()) ||
                     StringUtils.isNullOrEmpty(phoneText.getText()) ||
                     StringUtils.isNullOrEmpty(fromPlaceText.getText())){
-
+                    JOptionPane.showMessageDialog(null, "参数不能为空！", "失败", 0);
                 }
             }
         });
