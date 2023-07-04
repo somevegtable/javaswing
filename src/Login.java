@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Login {
+    int index;
     public void creat(){
         JFrame frame = new JFrame("登录");
         frame.setSize(600, 600);
@@ -46,28 +47,33 @@ public class Login {
         passwordText.setBounds(230, 150, 165, 25);
         panel.add(passwordText);
 
-        //单选框
-        JRadioButton radioButton1 = new JRadioButton("护工", true);
-        JRadioButton radioButton2 = new JRadioButton("保安");
-        JRadioButton radioButton3 = new JRadioButton("管理员");
-        JRadioButton radioButton4 = new JRadioButton("亲属");
-        JRadioButton radioButton5 = new JRadioButton("财务人员");
-        radioButton1.setBounds(120, 200, 100, 30);
-        radioButton2.setBounds(220, 200, 100, 30);
-        radioButton3.setBounds(320, 200, 100, 30);
-        radioButton4.setBounds(420, 200, 100, 30);
-        radioButton5.setBounds(520, 200, 100, 30);
-        ButtonGroup group = new ButtonGroup();
-        group.add(radioButton1);
-        group.add(radioButton2);
-        group.add(radioButton3);
-        group.add(radioButton4);
-        group.add(radioButton5);
-        panel.add(radioButton1);
-        panel.add(radioButton2);
-        panel.add(radioButton3);
-        panel.add(radioButton4);
-        panel.add(radioButton5);
+        //下拉列表框
+        JLabel jlb1;	//定义标签
+        jlb1=new JLabel("请选择身份：");
+        JComboBox<String> comboBox = new JComboBox<>(); //定义下拉框
+        comboBox.addItem("护工");    //添加选项
+        comboBox.addItem("保安");    //添加选项
+        comboBox.addItem("管理员");  //添加选项
+        comboBox.addItem("亲属");   //添加选项
+        comboBox.addItem("财务人员");  //添加选项
+        comboBox.setFont(new Font("微软雅黑", 0, 13));
+        jlb1.setFont(new Font("微软雅黑", 0, 13));
+        comboBox.setBounds(260, 200, 100, 25);
+        jlb1.setBounds(180, 200, 100, 25);
+        panel.add(jlb1);
+        panel.add(comboBox);
+        //下拉框监听事件,获取索引值
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = comboBox.getSelectedIndex();
+               if(selectedIndex >= 0){
+                   System.out.println("当前选中的值: " + comboBox.getSelectedItem());
+                   index=selectedIndex;
+                }
+            }
+        });
+
 
         //登录按钮
         JButton login = new JButton("登录");
@@ -107,31 +113,30 @@ public class Login {
                     }
                 }
             }
-            ResultSet adminResultSet = dao.query("select * from t_admin where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
-            ResultSet hugongResultSet = dao.query("select * from t_worker where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
-            ResultSet baoanResultSet = dao.query("select * from t_baoan where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
-
+            ResultSet userResultSet = dao.query("select * from t_user where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
 
             //用户密码判断
+
             try {
-                if(radioButtonText.equals("管理员") && adminResultSet.next()){
+                    //方法二
+                if(index==0 &&  userResultSet.next()){
                     //弹框
-                    JOptionPane.showMessageDialog(null, "管理员登录成功", "成功", 1);
-                    AdminMain.createShow(userName.getText());
-                    frame.setVisible(false);
-                }else if(radioButtonText.equals("护工") && hugongResultSet.next()){
                     JOptionPane.showMessageDialog(null, "护工登录成功", "成功", 1);
                     HugongMain.createShow(userName.getText());
                     frame.setVisible(false);
-                }else if(radioButtonText.equals("保安") && baoanResultSet.next()){
+                }else if(index==1&& userResultSet.next()){
                     JOptionPane.showMessageDialog(null, "保安登录成功", "成功", 1);
                     BaoanMain.createShow(userName.getText());
                     frame.setVisible(false);
-                }else if(radioButtonText.equals("亲属") && baoanResultSet.next()){
+                }else if(index==2 && userResultSet.next()){
+                    JOptionPane.showMessageDialog(null, "管理员登录成功", "成功", 1);
+                    AdminMain.createShow(userName.getText());
+                    frame.setVisible(false);
+                }else if(index==3 && userResultSet.next()){
                     JOptionPane.showMessageDialog(null, "亲属登录成功", "成功", 1);
                     familyMain.createShow(userName.getText());
                     frame.setVisible(false);
-                }else if(radioButtonText.equals("财务人员") && baoanResultSet.next()){
+                }else if(index==4 && userResultSet.next()){
                     JOptionPane.showMessageDialog(null, "财务人员登录成功", "成功", 1);
                     accountantMain.createShow(userName.getText());
                     frame.setVisible(false);
