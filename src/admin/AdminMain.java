@@ -25,7 +25,7 @@ public class AdminMain {
 
         //用户管理
         JButton userManage = new JButton("用户管理");
-        userManage.setBounds(100, 100, 150, 50);
+        userManage.setBounds(100, 50, 150, 50);
         panel.add(userManage);
         userManage.addActionListener(new AbstractAction() {
             @Override
@@ -40,7 +40,7 @@ public class AdminMain {
 
         //老人信息管理
         JButton oldInfoManage = new JButton("老人信息管理");
-        oldInfoManage.setBounds(300, 100, 150, 50);
+        oldInfoManage.setBounds(300, 50, 150, 50);
         panel.add(oldInfoManage);
         oldInfoManage.addActionListener(new AbstractAction() {
             @Override
@@ -55,7 +55,7 @@ public class AdminMain {
 
         //床位管理
         JButton placeManage = new JButton("床位管理");
-        placeManage.setBounds(100, 200, 150, 50);
+        placeManage.setBounds(100, 150, 150, 50);
         panel.add(placeManage);
         placeManage.addActionListener(new AbstractAction() {
             @Override
@@ -70,7 +70,7 @@ public class AdminMain {
 
         //护工信息管理
         JButton hugongManage = new JButton("护工信息管理");
-        hugongManage.setBounds(300, 200, 150, 50);
+        hugongManage.setBounds(300, 150, 150, 50);
         panel.add(hugongManage);
         hugongManage.addActionListener(new AbstractAction() {
             @Override
@@ -85,7 +85,7 @@ public class AdminMain {
 
         //保安信息管理
         JButton baoanManage = new JButton("保安信息管理");
-        baoanManage.setBounds(100, 300, 150, 50);
+        baoanManage.setBounds(100, 250, 150, 50);
         panel.add(baoanManage);
         baoanManage.addActionListener(new AbstractAction() {
             @Override
@@ -100,7 +100,7 @@ public class AdminMain {
 
         //费用管理
         JButton costManage = new JButton("费用管理");
-        costManage.setBounds(300, 300, 150, 50);
+        costManage.setBounds(300, 250, 150, 50);
         panel.add(costManage);
         costManage.addActionListener(new AbstractAction() {
             @Override
@@ -115,7 +115,7 @@ public class AdminMain {
 
         //员工薪资管理
         JButton salaryManage = new JButton("员工薪资管理");
-        salaryManage.setBounds(100, 400, 150, 50);
+        salaryManage.setBounds(100, 350, 150, 50);
         panel.add(salaryManage);
         salaryManage.addActionListener(new AbstractAction() {
             @Override
@@ -130,7 +130,7 @@ public class AdminMain {
 
         //健康管理
         JButton healthManage = new JButton("健康管理");
-        healthManage.setBounds(300, 400, 150, 50);
+        healthManage.setBounds(300, 350, 150, 50);
         panel.add(healthManage);
         healthManage.addActionListener(new AbstractAction() {
             @Override
@@ -145,7 +145,7 @@ public class AdminMain {
 
         //进出人员管理
         JButton outAndInManage = new JButton("进出人员管理");
-        outAndInManage.setBounds(100, 500, 150, 50);
+        outAndInManage.setBounds(100, 450, 150, 50);
         panel.add(outAndInManage);
         outAndInManage.addActionListener(new AbstractAction() {
             @Override
@@ -160,7 +160,7 @@ public class AdminMain {
 
         //退出
         JButton exit = new JButton("退出");
-        exit.setBounds(300, 500, 150, 50);
+        exit.setBounds(300, 450, 150, 50);
         panel.add(exit);
         exit.addActionListener(new AbstractAction() {
             @Override

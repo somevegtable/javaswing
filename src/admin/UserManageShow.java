@@ -51,6 +51,7 @@ public class UserManageShow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AddUserShow.createShow();
+                frame.setVisible(false);
             }
         });
 
@@ -60,6 +61,7 @@ public class UserManageShow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UpdateUserShow.createShow();
+                frame.setVisible(false);
             }
         });
 
@@ -69,6 +71,7 @@ public class UserManageShow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DeleteUserShow.createShow();
+                frame.setVisible(false);
             }
         });
 

@@ -6,8 +6,9 @@ import java.sql.Statement;
 
 public class DAO {
 
+    Connection connection = new Connect().getConn();
+
     public ResultSet query(String sql){
-        Connection connection = new Connect().getConn();
 
         ResultSet resultSet = null;
         try{
@@ -20,7 +21,6 @@ public class DAO {
     }
 
     public Integer update(String sql){
-        Connection connection = new Connect().getConn();
 
         Integer rows = null;
         try{
