@@ -141,7 +141,7 @@ public class RegisterMain  {
                                           password2.add(0,new String(pf2.getPassword()));
                                           if(password1.get(0).equals(password2.get(0))){
                                               System.out.println("注册成功！！！");
-                                              new DemoDialog();
+                                              JOptionPane.showMessageDialog(null, "注册成功，欢迎使用！！！", "成功", JOptionPane.QUESTION_MESSAGE);
                                           }
                                       }
                                   });
