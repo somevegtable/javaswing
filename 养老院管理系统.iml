@@ -17,5 +17,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mysql-connector-java-8.0.26" level="project" />
+    <orderEntry type="library" name="beautyeye_lnf" level="project" />
   </component>
 </module>

@@ -97,15 +97,9 @@ public class Login {
                     }
                 }
             }
-
-            ResultSet adminResultSet = null, hugongResultSet = null, baoanResultSet = null;
-            if (radioButtonText.equals("管理员")){
-                adminResultSet = dao.query("select * from t_admin where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
-            }else if(radioButtonText.equals("护工")){
-                hugongResultSet = dao.query("select * from t_worker where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
-            }else{
-                baoanResultSet = dao.query("select * from t_baoan where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
-            }
+            ResultSet adminResultSet = dao.query("select * from t_admin where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
+            ResultSet hugongResultSet = dao.query("select * from t_worker where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
+            ResultSet baoanResultSet = dao.query("select * from t_baoan where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
 
 
             //用户密码判断
