@@ -1,65 +1,68 @@
 package admin;
 
+import admin.buttonclick.AddBaoanShow;
+import admin.buttonclick.DeleteBaoanShow;
+import admin.buttonclick.UpdateBaoanShow;
 import dao.DAO;
+import entity.Baoan;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class OutAndInManageShow {
     public static void createShow() throws SQLException {
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
-        frame.setTitle("床位信息");
+        frame.setTitle("进出人员管理");
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        //查询床位信息
         DAO dao = new DAO();
-        ResultSet resultSet = dao.query("select * from t_bed");
+        ResultSet resultSet = dao.query("select * from t_baoan");
 
-        //ResultSet转换为List
-        /*List<Bed> bedList = new ArrayList<>();
-        while(resultSet.next()){
-            Bed bed = new Bed();
-            bed.setId(resultSet.getInt(1));
-            bed.setCode(resultSet.getString(2));
-            bed.setStatus(resultSet.getString(3));
-            bed.setHolder(resultSet.getString(4));
-            bedList.add(bed);
-        }*/
 
-        //创建JTable
-        /*JTable table;
-        String [] index = {"id","床位码","状态","占用者"};
-        Object [][] data = new Object[bedList.size()][index.length];
-        //3,向data中添加数据
-        for (int i = 0; i < bedList.size(); i++) {
-            Bed bed = bedList.get(i);
-            data[i][0] = bed.getId();
-            data[i][1] = bed.getCode();
-            data[i][2] = bed.getStatus();
-            data[i][3] = bed.getHolder();
-        }*/
+        JButton out = new JButton("外出人员信息管理");
+        out.setBounds(200, 100, 200, 100);
+        out.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    OutManageShow.createShow();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                frame.setVisible(false);
+            }
+        });
 
-        //4,创建一个默认的表格模型
-        /*DefaultTableModel defaultModel = new DefaultTableModel(data, index);
-        table=new JTable(defaultModel);
-        table.setBackground(Color.WHITE);
-        table.setPreferredScrollableViewportSize(new Dimension(100, 80));//JTable的高度和宽度按照设定
-        table.setFillsViewportHeight(true);
+        JButton in = new JButton("来访人员信息管理");
+        in.setBounds(200, 200, 200, 100);
+        in.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    InManageShow.createShow();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+                frame.setVisible(false);
+            }
+        });
 
-        //5，给表格设置滚动条
-        JScrollPane jScrollPane = new JScrollPane();
-        jScrollPane.setViewportView(table);*/
 
-        /*frame.add(panel, BorderLayout.NORTH);
-        frame.setVisible(true);
-        frame.add(jScrollPane,BorderLayout.CENTER);
+        panel.add(out);
+        panel.add(in);
+        frame.add(panel);
 
+        frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);*/
+        frame.setVisible(true);
     }
 }
