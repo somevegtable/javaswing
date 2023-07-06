@@ -95,7 +95,11 @@ public class Login {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                RegisterMain.createShow(userName.getText());
+                try {
+                    RegisterMain.createShow(userName.getText());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
                 System.out.println("点击注册");
             }
         } );

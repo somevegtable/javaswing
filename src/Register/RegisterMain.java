@@ -1,18 +1,26 @@
 package Register;
 
+import com.mysql.cj.util.StringUtils;
+import dao.DAO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 public class RegisterMain  {
-    public static void createShow(String text) {
+    public static void createShow(String text) throws SQLException {
+        final String[] sc = {"亲属"};
+        final String[][] genderstr = {new String[1]};
+        final int[] genderi = new int[1];
+        DAO dao = new DAO();
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
@@ -85,6 +93,7 @@ public class RegisterMain  {
                 //外部创建了一个类Gender 其中有一个Object参数表示男女 0代表女 1代表男
                 genderint.setGenger(1);
                 System.out.println(genderint.getGenger());
+                genderi[0] = (int) genderint.getGenger();
             }
         });
         //这里是女性按钮
@@ -93,7 +102,7 @@ public class RegisterMain  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 genderint.setGenger(0);
-                System.out.println(genderint.getGenger());
+                genderi[0] = (int) genderint.getGenger();
             }
         });
         gender.add(man);gender.add(woman);
@@ -107,17 +116,23 @@ public class RegisterMain  {
         JLabel jlb1;	//定义标签
         jlb1=new JLabel("请选择身份：");
         JComboBox<String> comboBox = new JComboBox<>(); //定义下拉框
-        comboBox.addItem("护工");    //添加选项
-        comboBox.addItem("保安");    //添加选项
-        comboBox.addItem("管理员");  //添加选项
         comboBox.addItem("亲属");   //添加选项
-        comboBox.addItem("财务人员");  //添加选项
         comboBox.setFont(new Font("微软雅黑", 0, 13));
         jlb1.setFont(new Font("微软雅黑", 0, 13));
         comboBox.setBounds(190, 280, 100, 25);
         jlb1.setBounds(110, 280, 100, 25);
         panel.add(jlb1);
         panel.add(comboBox);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = comboBox.getSelectedIndex();
+                if(selectedIndex >= 0){
+                    sc[0] = (String) comboBox.getSelectedItem();
+                    System.out.println("当前选中的值: " + sc[0]);
+                }
+            }
+        });
 
         //退出
         JButton exit = new JButton("重置");
@@ -130,18 +145,34 @@ public class RegisterMain  {
         confirm.addActionListener(new ActionListener(){
                                       @Override
                                       public void actionPerformed(ActionEvent e) {
-                                          if (t1.getText().equals("")){
-                                              username.add(0,null);
-                                          }else {
-                                              //如果取值不为空，就让他得到文本框中的内容
-                                              username.add(0,t1.getText());
-                                          }
-                                          //将密码栏中的信息得到，添加给passwrod数组 用于确认密码
+                                          username.add(0,new String(userText.getText()));
                                           password1.add(0,new String(pf1.getPassword()));
                                           password2.add(0,new String(pf2.getPassword()));
-                                          if(password1.get(0).equals(password2.get(0))){
+                                          System.out.println(genderi[0]);
+                                          if(genderi[0]==0){
+                                              genderstr[0][0]="女";
+                                          }else {
+                                              genderstr[0][0] ="男";
+                                          }
+                                          boolean m=password1.get(0).equals(password2.get(0));
+                                          if(m==false){
+                                              JOptionPane.showMessageDialog(null, "两次密码不相同", "失败", 0);
+                                          }else if(StringUtils.isNullOrEmpty(userText.getText())){
+                                              JOptionPane.showMessageDialog(null, "用户名不能为空！", "失败", 0);
+                                          }else if(StringUtils.isNullOrEmpty(pf1.getText())||StringUtils.isNullOrEmpty(pf2.getText())){
+                                              JOptionPane.showMessageDialog(null, "密码不能为空！", "失败", 0);
+                                          }else if(StringUtils.isNullOrEmpty(dh.getText())){
+                                              JOptionPane.showMessageDialog(null, "联系电话不能为空！", "失败", 0);
+                                          }else{
+                                              Integer row = dao.update("insert into t_user(name,gender,phone,account,password,role)" +
+                                                      "values('"+username.get(0)+"','"+ genderstr[0][0]+"','"+dh.getText()+"', '"+username.get(0)+"','"+password1.get(0)+"','"+sc[0]+"')");
                                               System.out.println("注册成功！！！");
-                                              JOptionPane.showMessageDialog(null, "注册成功，欢迎使用！！！", "成功", JOptionPane.QUESTION_MESSAGE);
+                                              System.out.println(username.get(0).getClass());
+                                              int res = JOptionPane.showConfirmDialog(null,"注册成功，欢迎使用！！！","成功",JOptionPane.DEFAULT_OPTION);//弹出一个对话框
+                                              System.out.println(res);
+                                              if (res == 0){//确认退出
+                                                  frame.setVisible(false);
+                                              }
                                           }
                                       }
                                   });
