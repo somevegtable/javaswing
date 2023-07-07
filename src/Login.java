@@ -55,7 +55,7 @@ public class Login {
         JComboBox<String> comboBox = new JComboBox<>(); //定义下拉框
         comboBox.addItem("护工");    //添加选项
         comboBox.addItem("保安");    //添加选项
-        comboBox.addItem("管理员");  //添加选项
+        comboBox.addItem("院长");  //添加选项
         comboBox.addItem("亲属");   //添加选项
         comboBox.addItem("财务");  //添加选项
         comboBox.setFont(new Font("微软雅黑", 0, 13));
@@ -146,7 +146,7 @@ public class Login {
                     BaoanMain.createShow(userName.getText());
                     frame.setVisible(false);
                 }else if(index==2 && adminResultSet.next()){
-                    JOptionPane.showMessageDialog(null, "管理员登录成功", "成功", 1);
+                    JOptionPane.showMessageDialog(null, "院长登录成功", "成功", 1);
                     AdminMain.createShow(userName.getText());
                     frame.setVisible(false);
                 }else if(index==3 && userResultSet.next()&&sc.equals(userResultSet.getString(7))){
