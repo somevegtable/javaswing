@@ -142,6 +142,7 @@ public class RegisterMain  {
         JButton confirm = new JButton("确定");
         confirm.setBounds(160, 350, 100, 50);
         panel.add(confirm);
+        //注册按钮点击事件
         confirm.addActionListener(new ActionListener(){
                                       @Override
                                       public void actionPerformed(ActionEvent e) {
@@ -149,11 +150,13 @@ public class RegisterMain  {
                                           password1.add(0,new String(pf1.getPassword()));
                                           password2.add(0,new String(pf2.getPassword()));
                                           System.out.println(genderi[0]);
+                                          //判断男女
                                           if(genderi[0]==0){
                                               genderstr[0][0]="女";
                                           }else {
                                               genderstr[0][0] ="男";
                                           }
+                                          //注册判断
                                           boolean m=password1.get(0).equals(password2.get(0));
                                           if(m==false){
                                               JOptionPane.showMessageDialog(null, "两次密码不相同", "失败", 0);
@@ -176,6 +179,7 @@ public class RegisterMain  {
                                           }
                                       }
                                   });
+        //重置按钮点击事件
         exit.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {

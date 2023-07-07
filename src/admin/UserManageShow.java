@@ -1,14 +1,20 @@
 package admin;
 
+import admin.buttonclick.AddUserShow;
+import admin.buttonclick.DeleteUserShow;
+import admin.buttonclick.UpdateUserShow;
 import dao.DAO;
 import entity.Bed;
+import entity.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserManageShow {
 
@@ -21,50 +27,85 @@ public class UserManageShow {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        //查询床位信息
+        //查询user信息
         DAO dao = new DAO();
-        ResultSet resultSet = dao.query("select * from t_bed");
+        ResultSet resultSet = dao.query("select * from t_user");
 
         //ResultSet转换为List
-        /*List<Bed> bedList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         while(resultSet.next()){
-            Bed bed = new Bed();
-            bed.setId(resultSet.getInt(1));
-            bed.setCode(resultSet.getString(2));
-            bed.setStatus(resultSet.getString(3));
-            bed.setHolder(resultSet.getString(4));
-            bedList.add(bed);
-        }*/
+            User user = new User();
+            user.setId(resultSet.getInt(1));
+            user.setName(resultSet.getString(2));
+            user.setGender(resultSet.getString(3));
+            user.setPhone(resultSet.getString(4));
+            user.setAccount(resultSet.getString(5));
+            user.setPassword(resultSet.getString(6));
+            user.setRole(resultSet.getString(7));
+            userList.add(user);
+        }
+
+        JButton addUser = new JButton("新增用户");
+        addUser.setBounds(100, 50, 100, 25);
+        addUser.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddUserShow.createShow();
+                frame.setVisible(false);
+            }
+        });
+
+        JButton updateUser = new JButton("修改用户");
+        updateUser.setBounds(250, 50, 100, 25);
+        updateUser.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UpdateUserShow.createShow();
+                frame.setVisible(false);
+            }
+        });
+
+        JButton deleteUser = new JButton("删除用户");
+        deleteUser.setBounds(400, 50, 100, 25);
+        deleteUser.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DeleteUserShow.createShow();
+                frame.setVisible(false);
+            }
+        });
+
+        panel.add(addUser);
+        panel.add(updateUser);
+        panel.add(deleteUser);
+        frame.add(panel);
 
         //创建JTable
-        /*JTable table;
-        String [] index = {"id","床位码","状态","占用者"};
-        Object [][] data = new Object[bedList.size()][index.length];
+        JTable table;
+        String [] index = {"id","姓名","性别","电话", "账号", "密码", "角色"};
+        Object [][] data = new Object[userList.size()][index.length];
         //3,向data中添加数据
-        for (int i = 0; i < bedList.size(); i++) {
-            Bed bed = bedList.get(i);
-            data[i][0] = bed.getId();
-            data[i][1] = bed.getCode();
-            data[i][2] = bed.getStatus();
-            data[i][3] = bed.getHolder();
-        }*/
+        for (int i = 0; i < userList.size(); i++) {
+            User user = userList.get(i);
+            data[i][0] = user.getId();
+            data[i][1] = user.getName();
+            data[i][2] = user.getGender();
+            data[i][3] = user.getPhone();
+            data[i][4] = user.getAccount();
+            data[i][5] = user.getPassword();
+            data[i][6] = user.getRole();
+        }
 
         //4,创建一个默认的表格模型
-        /*DefaultTableModel defaultModel = new DefaultTableModel(data, index);
+        DefaultTableModel defaultModel = new DefaultTableModel(data, index);
         table=new JTable(defaultModel);
-        table.setBackground(Color.WHITE);
-        table.setPreferredScrollableViewportSize(new Dimension(100, 80));//JTable的高度和宽度按照设定
-        table.setFillsViewportHeight(true);
+        table.setBackground(Color.white);
+        table.setBounds(0, 100, 600, 400);
 
         //5，给表格设置滚动条
-        JScrollPane jScrollPane = new JScrollPane();
-        jScrollPane.setViewportView(table);*/
-
-        /*frame.add(panel, BorderLayout.NORTH);
-        frame.setVisible(true);
-        frame.add(jScrollPane,BorderLayout.CENTER);
-
+        panel.add(table);
+        frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);*/
+        frame.setVisible(true);
     }
 }

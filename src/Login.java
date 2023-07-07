@@ -57,7 +57,7 @@ public class Login {
         comboBox.addItem("保安");    //添加选项
         comboBox.addItem("管理员");  //添加选项
         comboBox.addItem("亲属");   //添加选项
-        comboBox.addItem("财务人员");  //添加选项
+        comboBox.addItem("财务");  //添加选项
         comboBox.setFont(new Font("微软雅黑", 0, 13));
         jlb1.setFont(new Font("微软雅黑", 0, 13));
         comboBox.setBounds(260, 200, 100, 25);
@@ -117,7 +117,6 @@ public class Login {
             this.userName = userName;
             this.panel = panel;
         }
-
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("userName:" + userName.getText()+"  "+"password:" + password.getText());
@@ -155,7 +154,7 @@ public class Login {
                     familyMain.createShow(userName.getText());
                     frame.setVisible(false);
                 }else if(index==4 && userResultSet.next()&&sc.equals(userResultSet.getString(7))){
-                    JOptionPane.showMessageDialog(null, "财务人员登录成功", "成功", 1);
+                    JOptionPane.showMessageDialog(null, "财务登录成功", "成功", 1);
                     accountantMain.createShow(userName.getText());
                     frame.setVisible(false);
                 }else {
