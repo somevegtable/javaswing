@@ -135,7 +135,6 @@ public class Login {
             //用户密码判断
 
             try {
-                    //方法二
                 if(index==0 && userResultSet.next()&& sc.equals(userResultSet.getString(7))){
                     //弹框
                     JOptionPane.showMessageDialog(null, "护工登录成功", "成功", 1);
