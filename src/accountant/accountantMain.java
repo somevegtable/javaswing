@@ -44,7 +44,7 @@ public class accountantMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    CostShow.createShow();
+                    AsCostManange.createShow();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
