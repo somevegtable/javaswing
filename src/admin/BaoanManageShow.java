@@ -80,7 +80,7 @@ public class BaoanManageShow {
         //创建JTable
         JTable table;
         String [] index = {"id","姓名","账号","密码", "电话", "性别", "薪资"};
-        Object [][] data = new Object[baoanList.size()][index.length];
+        Object [][] data = new Object[baoanList.size()+1][index.length];
         //3,向data中添加数据
         data[0]=index;
         for (int i = 0; i < baoanList.size(); i++) {

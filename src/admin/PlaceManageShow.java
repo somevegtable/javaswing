@@ -77,7 +77,7 @@ public class PlaceManageShow {
         //创建JTable
         JTable table;
         String [] index = {"id","床位号","状态","占用者"};
-        Object [][] data = new Object[bedList.size()][index.length];
+        Object [][] data = new Object[bedList.size()+1][index.length];
         //3,向data中添加数据
         data[0]=index;
         for (int i = 0; i < bedList.size(); i++) {

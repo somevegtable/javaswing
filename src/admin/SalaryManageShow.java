@@ -81,7 +81,7 @@ public class SalaryManageShow {
         //创建JTable
         JTable table;
         String [] index = {"id","姓名","基础薪资","奖金", "应发薪资", "扣除", "实发薪资", "账号"};
-        Object [][] data = new Object[salaryList.size()][index.length];
+        Object [][] data = new Object[salaryList.size()+1][index.length];
         //3,向data中添加数据
         data[0]=index;
         for (int i = 0; i < salaryList.size(); i++) {

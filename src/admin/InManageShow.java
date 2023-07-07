@@ -77,7 +77,7 @@ public class InManageShow {
         //创建JTable
         JTable table;
         String [] index = {"id","姓名","性别","电话", "起始地"};
-        Object [][] data = new Object[inList.size()][index.length];
+        Object [][] data = new Object[inList.size()+1][index.length];
         //3,向data中添加数据
         data[0]=index;
         for (int i = 0; i < inList.size(); i++) {

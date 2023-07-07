@@ -80,7 +80,7 @@ public class HugongManageShow {
         //创建JTable
         JTable table;
         String [] index = {"id","姓名","性别","电话", "薪资", "账号", "密码"};
-        Object [][] data = new Object[hugonglist.size()][index.length];
+        Object [][] data = new Object[hugonglist.size()+1][index.length];
         //3,向data中添加数据
         data[0]=index;
         for (int i = 0; i < hugonglist.size(); i++) {
