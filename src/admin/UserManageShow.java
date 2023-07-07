@@ -85,15 +85,16 @@ public class UserManageShow {
         String [] index = {"id","姓名","性别","电话", "账号", "密码", "角色"};
         Object [][] data = new Object[userList.size()][index.length];
         //3,向data中添加数据
+        data[0]=index;
         for (int i = 0; i < userList.size(); i++) {
             User user = userList.get(i);
-            data[i][0] = user.getId();
-            data[i][1] = user.getName();
-            data[i][2] = user.getGender();
-            data[i][3] = user.getPhone();
-            data[i][4] = user.getAccount();
-            data[i][5] = user.getPassword();
-            data[i][6] = user.getRole();
+            data[i+1][0] = user.getId();
+            data[i+1][1] = user.getName();
+            data[i+1][2] = user.getGender();
+            data[i+1][3] = user.getPhone();
+            data[i+1][4] = user.getAccount();
+            data[i+1][5] = user.getPassword();
+            data[i+1][6] = user.getRole();
         }
 
         //4,创建一个默认的表格模型

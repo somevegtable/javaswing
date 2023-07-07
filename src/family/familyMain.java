@@ -12,12 +12,12 @@ public class familyMain {
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
-        frame.setTitle("护工");
+        frame.setTitle("老人亲属");
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        JLabel label = new JLabel("欢迎你");
+        JLabel label = new JLabel("欢迎您");
         label.setBounds(250, 0, 100, 25);
         label.setFont(new Font("微软雅黑", Font.BOLD, 25));
         label.setForeground(Color.red);
@@ -31,7 +31,7 @@ public class familyMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    OldInfoShow.createShow();
+                    OldInfoShow1.createShow(userName);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -39,14 +39,14 @@ public class familyMain {
         });
 
         //床位查看
-        JButton queryBed = new JButton("查看床位信息");
+        JButton queryBed = new JButton("查看健康信息");
         queryBed.setBounds(300, 100, 150, 50);
         panel.add(queryBed);
         queryBed.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    BedInfoShow.createShow();
+                    OldInfoShow2.createShow(userName);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -54,44 +54,14 @@ public class familyMain {
         });
 
         //健康信息登记
-        JButton updateHealth = new JButton("健康信息登记");
-        updateHealth.setBounds(100, 200, 150, 50);
-        panel.add(updateHealth);
-        updateHealth.addActionListener(new AbstractAction() {
+        JButton selectCost = new JButton("费用查询");
+        selectCost.setBounds(100, 300, 150, 50);
+        panel.add(selectCost);
+        selectCost.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    UpdateHealthShow.createShow();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-
-        //薪资查看
-        JButton querySalary = new JButton("薪资查看");
-        querySalary.setBounds(300, 200, 150, 50);
-        panel.add(querySalary);
-        querySalary.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    SalaryShow.createShow(userName);
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-
-        //费用支出登记
-        JButton cost = new JButton("费用支出登记");
-        cost.setBounds(100, 300, 150, 50);
-        panel.add(cost);
-        cost.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    CostShow.createShow();
+                    CostManageShow1.createShow(userName);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }

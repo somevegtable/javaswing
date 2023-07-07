@@ -83,16 +83,17 @@ public class SalaryManageShow {
         String [] index = {"id","姓名","基础薪资","奖金", "应发薪资", "扣除", "实发薪资", "账号"};
         Object [][] data = new Object[salaryList.size()][index.length];
         //3,向data中添加数据
+        data[0]=index;
         for (int i = 0; i < salaryList.size(); i++) {
             Salary user = salaryList.get(i);
-            data[i][0] = user.getId();
-            data[i][1] = user.getName();
-            data[i][2] = user.getBasis();
-            data[i][3] = user.getBonus();
-            data[i][4] = user.getSalary();
-            data[i][5] = user.getDeduct();
-            data[i][6] = user.getRealSalary();
-            data[i][7] = user.getAccount();
+            data[i+1][0] = user.getId();
+            data[i+1][1] = user.getName();
+            data[i+1][2] = user.getBasis();
+            data[i+1][3] = user.getBonus();
+            data[i+1][4] = user.getSalary();
+            data[i+1][5] = user.getDeduct();
+            data[i+1][6] = user.getRealSalary();
+            data[i+1][7] = user.getAccount();
         }
 
         //4,创建一个默认的表格模型

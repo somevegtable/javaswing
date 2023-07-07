@@ -79,12 +79,13 @@ public class PlaceManageShow {
         String [] index = {"id","床位号","状态","占用者"};
         Object [][] data = new Object[bedList.size()][index.length];
         //3,向data中添加数据
+        data[0]=index;
         for (int i = 0; i < bedList.size(); i++) {
             Bed bed = bedList.get(i);
-            data[i][0] = bed.getId();
-            data[i][1] = bed.getCode();
-            data[i][2] = bed.getStatus();
-            data[i][3] = bed.getHolder();
+            data[i+1][0] = bed.getId();
+            data[i+1][1] = bed.getCode();
+            data[i+1][2] = bed.getStatus();
+            data[i+1][3] = bed.getHolder();
         }
 
         //4,创建一个默认的表格模型
