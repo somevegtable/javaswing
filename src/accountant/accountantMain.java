@@ -12,7 +12,7 @@ public class accountantMain {
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
-        frame.setTitle("护工");
+        frame.setTitle("会计");
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
