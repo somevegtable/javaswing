@@ -2,8 +2,9 @@ package admin;
 
 import admin.buttonclick.*;
 import dao.DAO;
-import entity.Baoan;
-import entity.Salary;
+import entity.Cost;
+import entity.In;
+import entity.Out;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,61 +15,57 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SalaryManageShow {
+public class OutManageShow {
     public static void createShow() throws SQLException {
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
-        frame.setTitle("员工薪资管理");
+        frame.setTitle("外出人员管理");
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        //查询old信息
         DAO dao = new DAO();
-        ResultSet resultSet = dao.query("select * from t_salary");
+        ResultSet resultSet = dao.query("select * from t_out");
 
         //ResultSet转换为List
-        List<Salary> salaryList = new ArrayList<>();
+        List<Out> outList = new ArrayList<>();
         while(resultSet.next()){
-            Salary salary = new Salary();
-            salary.setId(resultSet.getInt(1));
-            salary.setName(resultSet.getString(2));
-            salary.setBasis(resultSet.getInt(3));
-            salary.setBonus(resultSet.getInt(4));
-            salary.setSalary(resultSet.getInt(5));
-            salary.setDeduct(resultSet.getInt(6));
-            salary.setRealSalary(resultSet.getInt(7));
-            salary.setAccount(resultSet.getString(8));
-            salaryList.add(salary);
+            Out out = new Out();
+            out.setId(resultSet.getInt(1));
+            out.setName(resultSet.getString(2));
+            out.setGender(resultSet.getString(3));
+            out.setPhone(resultSet.getString(4));
+            out.setToplace(resultSet.getString(5));
+            outList.add(out);
         }
 
-        JButton addUser = new JButton("新增薪资信息");
+        JButton addUser = new JButton("新增外出人员信息");
         addUser.setBounds(100, 50, 120, 25);
         addUser.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddSalaryShow.createShow();
+                AddOutShow.createShow();
                 frame.setVisible(false);
             }
         });
 
-        JButton updateUser = new JButton("修改薪资信息");
+        JButton updateUser = new JButton("修改外出人员信息");
         updateUser.setBounds(250, 50, 120, 25);
         updateUser.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                UpdateSalaryShow.createShow();
+                UpdateOutShow.createShow();
                 frame.setVisible(false);
             }
         });
 
-        JButton deleteUser = new JButton("删除薪资信息");
+        JButton deleteUser = new JButton("删除外出人员信息");
         deleteUser.setBounds(400, 50, 120, 25);
         deleteUser.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DeleteSalaryShow.createShow();
+                DeleteOutShow.createShow();
                 frame.setVisible(false);
             }
         });
@@ -80,19 +77,16 @@ public class SalaryManageShow {
 
         //创建JTable
         JTable table;
-        String [] index = {"id","姓名","基础薪资","奖金", "应发薪资", "扣除", "实发薪资", "账号"};
-        Object [][] data = new Object[salaryList.size()][index.length];
+        String [] index = {"id","姓名","性别","电话", "起始地"};
+        Object [][] data = new Object[outList.size()][index.length];
         //3,向data中添加数据
-        for (int i = 0; i < salaryList.size(); i++) {
-            Salary user = salaryList.get(i);
+        for (int i = 0; i < outList.size(); i++) {
+            Out user = outList.get(i);
             data[i][0] = user.getId();
             data[i][1] = user.getName();
-            data[i][2] = user.getBasis();
-            data[i][3] = user.getBonus();
-            data[i][4] = user.getSalary();
-            data[i][5] = user.getDeduct();
-            data[i][6] = user.getRealSalary();
-            data[i][7] = user.getAccount();
+            data[i][2] = user.getGender();
+            data[i][3] = user.getPhone();
+            data[i][4] = user.getToplace();
         }
 
         //4,创建一个默认的表格模型
