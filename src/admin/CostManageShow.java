@@ -77,7 +77,7 @@ public class CostManageShow {
         //创建JTable
         JTable table;
         String [] index = {"id","金额","床位号","描述"};
-        Object [][] data = new Object[costList.size()][index.length];
+        Object [][] data = new Object[costList.size()+1][index.length];
         //3,向data中添加数据
         data[0]=index;
         for (int i = 0; i < costList.size(); i++) {

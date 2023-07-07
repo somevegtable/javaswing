@@ -79,7 +79,7 @@ public class OldInfoManageShow {
         //创建JTable
         JTable table;
         String [] index = {"id","姓名","性别","床位", "健康状态", "电话"};
-        Object [][] data = new Object[oldList.size()][index.length];
+        Object [][] data = new Object[oldList.size()+1][index.length];
         //3,向data中添加数据
         data[0]=index;
         for (int i = 0; i < oldList.size(); i++) {
