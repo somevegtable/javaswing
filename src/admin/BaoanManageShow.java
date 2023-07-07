@@ -82,15 +82,16 @@ public class BaoanManageShow {
         String [] index = {"id","姓名","账号","密码", "电话", "性别", "薪资"};
         Object [][] data = new Object[baoanList.size()][index.length];
         //3,向data中添加数据
+        data[0]=index;
         for (int i = 0; i < baoanList.size(); i++) {
             Baoan user = baoanList.get(i);
-            data[i][0] = user.getId();
-            data[i][1] = user.getName();
-            data[i][2] = user.getAccount();
-            data[i][3] = user.getPassword();
-            data[i][4] = user.getPhone();
-            data[i][5] = user.getGender();
-            data[i][6] = user.getSalary();
+            data[i+1][0] = user.getId();
+            data[i+1][1] = user.getName();
+            data[i+1][2] = user.getAccount();
+            data[i+1][3] = user.getPassword();
+            data[i+1][4] = user.getPhone();
+            data[i+1][5] = user.getGender();
+            data[i+1][6] = user.getSalary();
         }
 
         //4,创建一个默认的表格模型

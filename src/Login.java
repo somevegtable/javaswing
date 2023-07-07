@@ -82,7 +82,7 @@ public class Login {
         JButton login = new JButton("登录");
         login.setBounds(200, 250, 80, 25);
         panel.add(login);
-        JButton resigter = new JButton("注册");
+        JButton resigter = new JButton("亲属注册");
         resigter.setBounds(290, 250, 80, 25);
         panel.add(resigter);
 

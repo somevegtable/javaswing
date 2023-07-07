@@ -82,15 +82,16 @@ public class HugongManageShow {
         String [] index = {"id","姓名","性别","电话", "薪资", "账号", "密码"};
         Object [][] data = new Object[hugonglist.size()][index.length];
         //3,向data中添加数据
+        data[0]=index;
         for (int i = 0; i < hugonglist.size(); i++) {
             Hugong user = hugonglist.get(i);
-            data[i][0] = user.getId();
-            data[i][1] = user.getName();
-            data[i][2] = user.getGender();
-            data[i][3] = user.getPhone();
-            data[i][4] = user.getSalary();
-            data[i][5] = user.getAccount();
-            data[i][6] = user.getPassword();
+            data[i+1][0] = user.getId();
+            data[i+1][1] = user.getName();
+            data[i+1][2] = user.getGender();
+            data[i+1][3] = user.getPhone();
+            data[i+1][4] = user.getSalary();
+            data[i+1][5] = user.getAccount();
+            data[i+1][6] = user.getPassword();
         }
 
         //4,创建一个默认的表格模型

@@ -81,14 +81,15 @@ public class OldInfoManageShow {
         String [] index = {"id","姓名","性别","床位", "健康状态", "电话"};
         Object [][] data = new Object[oldList.size()][index.length];
         //3,向data中添加数据
+        data[0]=index;
         for (int i = 0; i < oldList.size(); i++) {
             Old user = oldList.get(i);
-            data[i][0] = user.getId();
-            data[i][1] = user.getName();
-            data[i][2] = user.getGender();
-            data[i][3] = user.getPlace();
-            data[i][4] = user.getStatus();
-            data[i][5] = user.getPhone();
+            data[i+1][0] = user.getId();
+            data[i+1][1] = user.getName();
+            data[i+1][2] = user.getGender();
+            data[i+1][3] = user.getPlace();
+            data[i+1][4] = user.getStatus();
+            data[i+1][5] = user.getPhone();
         }
 
         //4,创建一个默认的表格模型

@@ -79,12 +79,13 @@ public class CostManageShow {
         String [] index = {"id","金额","床位号","描述"};
         Object [][] data = new Object[costList.size()][index.length];
         //3,向data中添加数据
+        data[0]=index;
         for (int i = 0; i < costList.size(); i++) {
             Cost user = costList.get(i);
-            data[i][0] = user.getId();
-            data[i][1] = user.getAmount();
-            data[i][2] = user.getPlace();
-            data[i][3] = user.getDescription();
+            data[i+1][0] = user.getId();
+            data[i+1][1] = user.getAmount();
+            data[i+1][2] = user.getPlace();
+            data[i+1][3] = user.getDescription();
         }
 
         //4,创建一个默认的表格模型
