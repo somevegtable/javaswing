@@ -22,55 +22,9 @@ public class accountantMain {
         label.setFont(new Font("微软雅黑", Font.BOLD, 25));
         label.setForeground(Color.red);
         panel.add(label);
-
-        //老人信息查看
-        JButton queryOld = new JButton("查看老人信息");
-        queryOld.setBounds(100, 100, 150, 50);
-        panel.add(queryOld);
-        queryOld.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    OldInfoShow.createShow();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-
-        //床位查看
-        JButton queryBed = new JButton("查看床位信息");
-        queryBed.setBounds(300, 100, 150, 50);
-        panel.add(queryBed);
-        queryBed.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    BedInfoShow.createShow();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-
-        //健康信息登记
-        JButton updateHealth = new JButton("健康信息登记");
-        updateHealth.setBounds(100, 200, 150, 50);
-        panel.add(updateHealth);
-        updateHealth.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    UpdateHealthShow.createShow();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
-
         //薪资查看
         JButton querySalary = new JButton("薪资查看");
-        querySalary.setBounds(300, 200, 150, 50);
+        querySalary.setBounds(100, 200, 150, 50);
         panel.add(querySalary);
         querySalary.addActionListener(new AbstractAction() {
             @Override
@@ -82,7 +36,6 @@ public class accountantMain {
                 }
             }
         });
-
         //费用支出登记
         JButton cost = new JButton("费用支出登记");
         cost.setBounds(100, 300, 150, 50);
@@ -97,7 +50,6 @@ public class accountantMain {
                 }
             }
         });
-
         //退出
         JButton exit = new JButton("退出");
         exit.setBounds(300, 300, 150, 50);
@@ -108,7 +60,6 @@ public class accountantMain {
                 frame.setVisible(false);
             }
         });
-
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 
