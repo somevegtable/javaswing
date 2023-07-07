@@ -25,7 +25,7 @@ public class RegisterMain  {
         JFrame frame = new JFrame();
         frame.setSize(600, 600);
         frame.setLocationRelativeTo(null);
-        frame.setTitle("老人亲属注册");
+        frame.setTitle("用户注册");
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -33,11 +33,11 @@ public class RegisterMain  {
         //创建一个用户名的text
         JTextField t1 = new JTextField(10);
 
-        /*JLabel label = new JLabel("欢迎您注册使用本系统");
+        JLabel label = new JLabel("欢迎您注册使用本系统");
         label.setBounds(140, 0, 300, 30);
         label.setFont(new Font("微软雅黑", Font.BOLD, 25));
         label.setForeground(Color.red);
-        panel.add(label);*/
+        panel.add(label);
         //这里创建三个列表用于后期接收传来的内容，在注册功能中比对密码的正确性
         List username = new ArrayList();
         List password1 = new ArrayList();
@@ -49,8 +49,6 @@ public class RegisterMain  {
         JLabel l2 = new JLabel("密  码：");
         JLabel l3 = new JLabel("确认密码:");
         JLabel l4 = new JLabel("电  话：");
-        JLabel l5 = new JLabel("老人姓名：");
-
         l1.setFont(new Font("微软雅黑", 0, 13));
         l1.setBounds(110, 50, 80, 25);
         panel.add(l1);
@@ -63,9 +61,6 @@ public class RegisterMain  {
         l4.setFont(new Font("微软雅黑", 0, 13));
         l4.setBounds(110, 140, 80, 25);
         panel.add(l4);
-        l5.setFont(new Font("微软雅黑", 0, 13));
-        l5.setBounds(110, 170, 80, 25);
-        panel.add(l5);
         //创建一个用户名的text
         JTextField userText = new JTextField(20);
         userText.setBounds(180, 50, 165, 25);
@@ -83,20 +78,13 @@ public class RegisterMain  {
         dh.setBounds(180, 140, 165, 25);
         panel.add(dh);
 
-        //放置老人姓名
-        JTextField oName = new JTextField(10);
-        oName.setBounds(180, 170, 165, 25);
-        panel.add(oName);
         //这里存放性别
         JLabel labelgenger = new JLabel("性别:");
         ButtonGroup gender = new ButtonGroup();
-
         JRadioButton man = new JRadioButton("男",true);
         JRadioButton woman = new JRadioButton("女",false);
-        /*man.setBounds(110,140,50,50);
-        woman.setBounds(160,140,50,50);*/
         labelgenger.setFont(new Font("微软雅黑", 0, 13));
-        labelgenger.setBounds(110, 210, 80, 25);
+        labelgenger.setBounds(110, 180, 80, 25);
         panel.add(labelgenger);
         //点击男性时候 把性别参数改为1
         //这里是男性按钮
@@ -119,12 +107,11 @@ public class RegisterMain  {
             }
         });
         gender.add(man);gender.add(woman);
-
         //ButtonGroup放在JPanel中
         JPanel ButtonPanel=new JPanel();
         ButtonPanel.add(man);
         ButtonPanel.add(woman);
-        ButtonPanel.setBounds(200, 210, 80, 80);
+        ButtonPanel.setBounds(200, 180, 80, 80);
         panel.add(ButtonPanel);
 
         JLabel jlb1;	//定义标签
@@ -158,60 +145,60 @@ public class RegisterMain  {
         panel.add(confirm);
         //注册按钮点击事件
         confirm.addActionListener(new ActionListener(){
-                                      @Override
-                                      public void actionPerformed(ActionEvent e) {
-                                          username.add(0,new String(userText.getText()));
-                                          password1.add(0,new String(pf1.getPassword()));
-                                          password2.add(0,new String(pf2.getPassword()));
-                                          System.out.println(genderi[0]);
-                                          //判断男女
-                                          if(genderi[0]==0){
-                                              genderstr[0][0]="女";
-                                          }else {
-                                              genderstr[0][0] ="男";
-                                          }
-                                          ResultSet userResultSet = dao.query("select account from t_user ");
-                                          ResultSet oldResultSet = dao.query("select * from t_old where phone = '"+dh.getText()+"'");
-                                          String mc= (String) username.get(0);
-                                          //注册判断
-                                          boolean m=password1.get(0).equals(password2.get(0));
-                                          if(m==false){
-                                              JOptionPane.showMessageDialog(null, "两次密码不相同", "失败", 0);
-                                          }else if(StringUtils.isNullOrEmpty(userText.getText())){
-                                              JOptionPane.showMessageDialog(null, "用户名不能为空！", "失败", 0);
-                                          }else if(StringUtils.isNullOrEmpty(pf1.getText())||StringUtils.isNullOrEmpty(pf2.getText())){
-                                              JOptionPane.showMessageDialog(null, "密码不能为空！", "失败", 0);
-                                          }else if(StringUtils.isNullOrEmpty(dh.getText())){
-                                              JOptionPane.showMessageDialog(null, "联系电话不能为空！", "失败", 0);
-                                          }else{
-                                              try{
-                                                  while(userResultSet.next()){
-                                                      if(userResultSet.getString(1).equals(mc)){
-                                                          JOptionPane.showMessageDialog(null, "用户名已存在！", "失败", 0);
-                                                          break;
-                                                      }else if(!oldResultSet.next()){
-                                                          JOptionPane.showMessageDialog(null, "不合注册要求！", "失败", 0);
-                                                          break;
-                                                      }else {
-                                                          Integer row = dao.update("insert into t_user(name,gender,phone,account,password,role)" +
-                                                                  "values('"+username.get(0)+"','"+ genderstr[0][0]+"','"+dh.getText()+"', '"+username.get(0)+"','"+password1.get(0)+"','"+sc[0]+"')");
-                                                          System.out.println("注册成功！！！");
-                                                          System.out.println(username.get(0).getClass());
-                                                          int res = JOptionPane.showConfirmDialog(null,"注册成功，欢迎使用！！！","成功",JOptionPane.DEFAULT_OPTION);//弹出一个对话框
-                                                          System.out.println(res);
-                                                          if (res == 0){//确认退出
-                                                              frame.setVisible(false);
-                                                          }
-                                                          break;
-                                                      }
-                                                  }
-                                              }catch (Exception e1){
-                                                  e1.printStackTrace();
-                                              }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                username.add(0,new String(userText.getText()));
+                password1.add(0,new String(pf1.getPassword()));
+                password2.add(0,new String(pf2.getPassword()));
+                System.out.println(genderi[0]);
+                //判断男女
+                if(genderi[0]==0){
+                    genderstr[0][0]="女";
+                }else {
+                    genderstr[0][0] ="男";
+                }
+                ResultSet userResultSet = dao.query("select account from t_user ");
+                ResultSet oldResultSet = dao.query("select * from t_old where phone = '"+dh.getText()+"'");
+                String mc= (String) username.get(0);
+                //注册判断
+                boolean m=password1.get(0).equals(password2.get(0));
+                if(m==false){
+                    JOptionPane.showMessageDialog(null, "两次密码不相同", "失败", 0);
+                }else if(StringUtils.isNullOrEmpty(userText.getText())){
+                    JOptionPane.showMessageDialog(null, "用户名不能为空！", "失败", 0);
+                }else if(StringUtils.isNullOrEmpty(pf1.getText())||StringUtils.isNullOrEmpty(pf2.getText())){
+                    JOptionPane.showMessageDialog(null, "密码不能为空！", "失败", 0);
+                }else if(StringUtils.isNullOrEmpty(dh.getText())){
+                    JOptionPane.showMessageDialog(null, "联系电话不能为空！", "失败", 0);
+                }else{
+                    try{
+                        while(userResultSet.next()){
+                            if(userResultSet.getString(1).equals(mc)){
+                                JOptionPane.showMessageDialog(null, "用户名已存在！", "失败", 0);
+                                break;
+                            }else if(!oldResultSet.next()){
+                                JOptionPane.showMessageDialog(null, "不合注册要求！", "失败", 0);
+                                break;
+                            }else {
+                                Integer row = dao.update("insert into t_user(name,gender,phone,account,password,role)" +
+                                        "values('"+username.get(0)+"','"+ genderstr[0][0]+"','"+dh.getText()+"', '"+username.get(0)+"','"+password1.get(0)+"','"+sc[0]+"')");
+                                System.out.println("注册成功！！！");
+                                System.out.println(username.get(0).getClass());
+                                int res = JOptionPane.showConfirmDialog(null,"注册成功，欢迎使用！！！","成功",JOptionPane.DEFAULT_OPTION);//弹出一个对话框
+                                System.out.println(res);
+                                if (res == 0){//确认退出
+                                    frame.setVisible(false);
+                                }
+                                break;
+                            }
+                        }
+                    }catch (Exception e1){
+                        e1.printStackTrace();
+                    }
 
-                                          }
-                                      }
-                                  });
+                }
+            }
+        });
         //重置按钮点击事件
         exit.addActionListener(new ActionListener(){
             @Override
