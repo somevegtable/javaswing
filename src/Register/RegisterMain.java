@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -156,6 +157,9 @@ public class RegisterMain  {
                                           }else {
                                               genderstr[0][0] ="男";
                                           }
+                                          ResultSet userResultSet = dao.query("select account from t_user ");
+                                          ResultSet oldResultSet = dao.query("select * from t_old where phone = '"+dh.getText()+"'");
+                                          String mc= (String) username.get(0);
                                           //注册判断
                                           boolean m=password1.get(0).equals(password2.get(0));
                                           if(m==false){
@@ -167,15 +171,31 @@ public class RegisterMain  {
                                           }else if(StringUtils.isNullOrEmpty(dh.getText())){
                                               JOptionPane.showMessageDialog(null, "联系电话不能为空！", "失败", 0);
                                           }else{
-                                              Integer row = dao.update("insert into t_user(name,gender,phone,account,password,role)" +
-                                                      "values('"+username.get(0)+"','"+ genderstr[0][0]+"','"+dh.getText()+"', '"+username.get(0)+"','"+password1.get(0)+"','"+sc[0]+"')");
-                                              System.out.println("注册成功！！！");
-                                              System.out.println(username.get(0).getClass());
-                                              int res = JOptionPane.showConfirmDialog(null,"注册成功，欢迎使用！！！","成功",JOptionPane.DEFAULT_OPTION);//弹出一个对话框
-                                              System.out.println(res);
-                                              if (res == 0){//确认退出
-                                                  frame.setVisible(false);
+                                              try{
+                                                  while(userResultSet.next()){
+                                                      if(userResultSet.getString(1).equals(mc)){
+                                                          JOptionPane.showMessageDialog(null, "用户名已存在！", "失败", 0);
+                                                          break;
+                                                      }else if(!oldResultSet.next()){
+                                                          JOptionPane.showMessageDialog(null, "不合注册要求！", "失败", 0);
+                                                          break;
+                                                      }else {
+                                                          Integer row = dao.update("insert into t_user(name,gender,phone,account,password,role)" +
+                                                                  "values('"+username.get(0)+"','"+ genderstr[0][0]+"','"+dh.getText()+"', '"+username.get(0)+"','"+password1.get(0)+"','"+sc[0]+"')");
+                                                          System.out.println("注册成功！！！");
+                                                          System.out.println(username.get(0).getClass());
+                                                          int res = JOptionPane.showConfirmDialog(null,"注册成功，欢迎使用！！！","成功",JOptionPane.DEFAULT_OPTION);//弹出一个对话框
+                                                          System.out.println(res);
+                                                          if (res == 0){//确认退出
+                                                              frame.setVisible(false);
+                                                          }
+                                                          break;
+                                                      }
+                                                  }
+                                              }catch (Exception e1){
+                                                  e1.printStackTrace();
                                               }
+
                                           }
                                       }
                                   });

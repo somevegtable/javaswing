@@ -24,13 +24,13 @@ public class accountantMain {
         panel.add(label);
         //薪资查看
         JButton querySalary = new JButton("薪资查看");
-        querySalary.setBounds(180, 80, 150, 50);
+        querySalary.setBounds(210, 80, 150, 50);
         panel.add(querySalary);
         querySalary.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    SalaryShow.createShow(userName);
+                    AcSalaryShow.createShow(userName);
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
@@ -38,7 +38,7 @@ public class accountantMain {
         });
         //费用支出登记
         JButton cost = new JButton("费用管理");
-        cost.setBounds(180, 160, 150, 50);
+        cost.setBounds(210, 160, 150, 50);
         panel.add(cost);
         cost.addActionListener(new AbstractAction() {
             @Override
@@ -52,7 +52,7 @@ public class accountantMain {
         });
         //退出
         JButton exit = new JButton("退出");
-        exit.setBounds(180, 240, 150, 50);
+        exit.setBounds(210, 240, 150, 50);
         panel.add(exit);
         exit.addActionListener(new AbstractAction() {
             @Override
