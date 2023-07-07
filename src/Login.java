@@ -131,7 +131,7 @@ public class Login {
                 }
             }
             ResultSet userResultSet = dao.query("select * from t_user where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
-
+            ResultSet adminResultSet = dao.query("select * from t_admin where account = '"+userName.getText()+"' and password = '"+password.getText()+"'");
             //用户密码判断
 
             try {
@@ -145,7 +145,7 @@ public class Login {
                     JOptionPane.showMessageDialog(null, "保安登录成功", "成功", 1);
                     BaoanMain.createShow(userName.getText());
                     frame.setVisible(false);
-                }else if(index==2 && userResultSet.next()&&sc.equals(userResultSet.getString(7))){
+                }else if(index==2 && adminResultSet.next()){
                     JOptionPane.showMessageDialog(null, "管理员登录成功", "成功", 1);
                     AdminMain.createShow(userName.getText());
                     frame.setVisible(false);
