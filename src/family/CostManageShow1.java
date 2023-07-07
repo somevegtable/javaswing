@@ -33,8 +33,11 @@ public class CostManageShow1 {
         String phone=resultSet.getString(4);
         resultSet = dao.query("select * from t_old where phone = '"+phone+"'");
         resultSet.next();
-        String id=resultSet.getString(1);
-        resultSet = dao.query("select * from t_cost where id = '"+id+"'");
+        if(resultSet!=null){
+            String id=resultSet.getString(1);
+            resultSet = dao.query("select * from t_cost where id = '"+id+"'");
+        }
+
         //ResultSet转换为List
         List<Cost> costList = new ArrayList<>();
         while(resultSet.next()){
