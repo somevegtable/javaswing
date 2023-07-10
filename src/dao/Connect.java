@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Vector;
 
 public class Connect {
     Connection conn;
@@ -26,5 +27,7 @@ public class Connect {
     public static void main(String[] args) { // 主方法，测试连接
         Connect c = new Connect(); // 创建本类对象
         c.getConn(); // 调用连接数据库的方法
+        Vector<Integer> vector = new Vector<>();
+        vector.add(1);
     }
 }

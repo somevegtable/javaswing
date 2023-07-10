@@ -42,7 +42,7 @@ public class RegisterPersonInShow {
         panel.add(genderText);
 
         //创建来访人员phone状态标签
-        JLabel phoneLabel = new JLabel("性别：");
+        JLabel phoneLabel = new JLabel("电话号：");
         phoneLabel.setFont(new Font("微软雅黑", 0, 13));
         phoneLabel.setBounds(180, 200, 80, 25);
         panel.add(phoneLabel);

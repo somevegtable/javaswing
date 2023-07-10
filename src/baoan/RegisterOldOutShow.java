@@ -22,7 +22,7 @@ public class RegisterOldOutShow {
         //创建外出人员place标签
         JLabel placeLabel = new JLabel("外出人员床位号：");
         placeLabel.setFont(new Font("微软雅黑", 0, 13));
-        placeLabel.setBounds(180, 100, 80, 25);
+        placeLabel.setBounds(150, 100, 110, 25);
         panel.add(placeLabel);
 
         //创建外出人员place输入文字域
