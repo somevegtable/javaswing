@@ -52,7 +52,7 @@ public class HugongMain {
         });
 
         //健康信息登记
-        JButton updateHealth = new JButton("健康信息登记");
+        JButton updateHealth = new JButton("健康信息修改");
         updateHealth.setBounds(100, 200, 150, 50);
         panel.add(updateHealth);
         updateHealth.addActionListener(new AbstractAction() {
