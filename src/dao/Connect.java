@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 import java.util.Vector;
 
 public class Connect {
@@ -29,5 +31,16 @@ public class Connect {
         c.getConn(); // 调用连接数据库的方法
         Vector<Integer> vector = new Vector<>();
         vector.add(1);
+
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
+
+        priorityQueue.offer(2);
+        priorityQueue.offer(1);
+        System.out.println(priorityQueue.peek());
     }
 }

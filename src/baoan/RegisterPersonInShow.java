@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RegisterPersonInShow {
     public static void createShow() throws SQLException {
@@ -74,6 +76,14 @@ public class RegisterPersonInShow {
                     StringUtils.isNullOrEmpty(phoneText.getText()) ||
                     StringUtils.isNullOrEmpty(fromPlaceText.getText())){
                     JOptionPane.showMessageDialog(null, "参数不能为空！", "失败", 0);
+                }else{
+                    int check = JOptionPane.showConfirmDialog(null, "确定登记该用户吗?", "添加",JOptionPane.YES_NO_OPTION);//返回的是按钮的index  i=0或者1
+                    if (check == 0) {
+                        DAO dao = new DAO();
+                        Integer row = dao.update("insert into t_in(name, gender, phone, fromplace)" +
+                                "values('"+nameText.getText()+"', '"+genderText.getText()+"', '"+phoneText.getText()+"', '"+fromPlaceText.getText()+"')");
+                        JOptionPane.showMessageDialog(null, "添加成功", "成功", 1);
+                    }
                 }
             }
         });
