@@ -18,7 +18,7 @@ public class RegisterOldOutShow {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-
+        DAO dao=new DAO();
         //创建外出人员place标签
         JLabel placeLabel = new JLabel("外出人员床位号：");
         placeLabel.setFont(new Font("微软雅黑", 0, 13));
@@ -62,6 +62,19 @@ public class RegisterOldOutShow {
                     StringUtils.isNullOrEmpty(nameText.getText()) ||
                     StringUtils.isNullOrEmpty(toPlaceText.getText())){
                     JOptionPane.showMessageDialog(null, "参数不能为空！", "失败", 0);
+                }
+                else {
+                    ResultSet rs=dao.query("select * from t_old where place="+placeText.getText()+" and name= '"+nameText.getText()+"'");
+                    try {
+                            if(rs.next()){
+                                dao.update("insert into t_out(name, gender, phone, toplace) values('"+rs.getString(2)+"','"+rs.getString(3)+"','"+rs.getString(6)+"','"+toPlaceText.getText()+"')");
+                                JOptionPane.showMessageDialog(null, "登记成功", "成功", 0);
+                                frame.setVisible(false);
+                            }
+
+                    }catch (Exception e1){
+                        e1.printStackTrace();
+                    }
                 }
             }
         });

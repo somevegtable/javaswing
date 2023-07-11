@@ -18,7 +18,7 @@ public class RegisterPersonInShow {
 
         JPanel panel = new JPanel();
         panel.setLayout(null);
-
+        DAO dao=new DAO();
         //创建来访人员name标签
         JLabel nameLabel = new JLabel("姓名：");
         nameLabel.setFont(new Font("微软雅黑", 0, 13));
@@ -74,6 +74,11 @@ public class RegisterPersonInShow {
                     StringUtils.isNullOrEmpty(phoneText.getText()) ||
                     StringUtils.isNullOrEmpty(fromPlaceText.getText())){
                     JOptionPane.showMessageDialog(null, "参数不能为空！", "失败", 0);
+                }
+                else {
+                    dao.update("insert into t_in(name,gender,phone,fromplace) values('"+nameText.getText()+"','"+genderText.getText()+"','"+phoneText.getText()+"','"+fromPlaceText.getText()+"')");
+                    JOptionPane.showMessageDialog(null, "登记成功", "成功", 0);
+                    frame.setVisible(false);
                 }
             }
         });
