@@ -1,6 +1,6 @@
 package admin;
 
-import hugong.*;
+import admin.*;
 
 import javax.swing.*;
 import java.awt.*;
